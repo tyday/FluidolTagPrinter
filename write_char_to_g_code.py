@@ -1,15 +1,10 @@
 import json, os, subprocess,sys
-# import turtle
 
-# CWD = os.getcwd()
 CWD = sys.path[0]
 OUTPUT_FILE = 'g_code_output.ngc'
 OUTPUT_FILE_PATH = os.path.join(CWD, OUTPUT_FILE)
-# DIRECTORY = os.path.join(CWD, 'Characters')
-# CHARACTER_FILE = os.path.join(DIRECTORY, 'Characters.json')
-# CHARACTER_FILE = os.path.join(os.getcwd(), 'characters.json')
-SPACING = 0.025
-# GCODE_FILE = os.path.join(os.getcwd(), 'g_code_output.ngc')
+SPACING = 0.0125
+CENTERED = True
 Z_HEIGHT_ENGAGED = -0.005
 Z_HEIGHT_DISENGAGED = 0.25
 
@@ -80,7 +75,7 @@ TAG_DEFINITIONS = {
             'x1': 1.653543,
             'x2': 2.283465
         },
-        'font': 'isocp2__0p11.json'
+        'font': 'isocp2__0p10.json'
     },
     "Tag_special": {
         'name': 'Special Tag',
@@ -245,7 +240,7 @@ if __name__ == '__main__':
                     
                 # Use remaining text to center the current g_code
                 # Add remaining_text/2 to each x in current_gcode
-                current_gcode = move_to_position(tag_type, current_gcode, remaining_space, False)
+                current_gcode = move_to_position(tag_type, current_gcode, remaining_space, CENTERED)
 
                 # Add current_gcode to total_gcode
                 total_gcode += current_gcode
