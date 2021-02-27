@@ -1,12 +1,15 @@
-import json, os, subprocess
+import json, os, subprocess,sys
 # import turtle
 
-CWD = os.getcwd()
-DIRECTORY = os.path.join(CWD, 'Characters')
+# CWD = os.getcwd()
+CWD = sys.path[0]
+OUTPUT_FILE = 'g_code_output.ngc'
+OUTPUT_FILE_PATH = os.path.join(CWD, OUTPUT_FILE)
+# DIRECTORY = os.path.join(CWD, 'Characters')
 # CHARACTER_FILE = os.path.join(DIRECTORY, 'Characters.json')
-CHARACTER_FILE = os.path.join(os.getcwd(), 'characters.json')
+# CHARACTER_FILE = os.path.join(os.getcwd(), 'characters.json')
 SPACING = 0.025
-GCODE_FILE = os.path.join(os.getcwd(), 'g_code_output.ngc')
+# GCODE_FILE = os.path.join(os.getcwd(), 'g_code_output.ngc')
 Z_HEIGHT_ENGAGED = -0.005
 Z_HEIGHT_DISENGAGED = 0.25
 
@@ -35,19 +38,19 @@ TAG_DEFINITIONS = {
             'shaft'
         ],
         'style': {
-            'y': 0.3731,
-            'x1': 0.6109,
-            'x2': 2.5285
+            'y': 0.3346457,
+            'x1': 0.7480315,
+            'x2': 2.515748
         },
         'serial': {
-            'y': 0.2155,
-            'x1': 0.63,
-            'x2': 1.4381
+            'y': 0.1968504,
+            'x1': 0.6692913,
+            'x2': 1.377953
         },
         'shaft': {
-            'y': 0.2155,
-            'x1': 1.7776,
-            'x2': 2.5284
+            'y': 0.1968504,
+            'x1': 1.889764,
+            'x2': 2.519685
         },
         'font': 'isocp2__0p11.json'
     },
@@ -103,19 +106,12 @@ TAG_DEFINITIONS = {
     }
 }
 
-# GCODES = {}
-# with open(CHARACTER_FILE, 'r') as f:
-#     GCODES = json.load(f)
 
 
 
 
 def handle_cnc_move(code, current_location, current_gcode):
-    # with open(GCODE_FILE, 'a') as f:
-    #     f.write(
-    #         f"{code[0]} X{current_location['x'] } Y{current_location['y']} Z{current_location['z']}\n")
     current_gcode.append(f"{code[0]} X{current_location['x'] } Y{current_location['y']} Z{current_location['z']}")
-    # print(f"{code[0]} X{current_location['x'] } Y{current_location['y']} Z{current_location['z']}")
 
 
 def handle_G0G1(code, local_origin, current_location, current_gcode):
@@ -176,7 +172,7 @@ def print_to_slot(tag_type, slot, text, current_gcode):
         character = str(ord(character))
         # print(GCODES[character])
         GCODES = {}
-        with open(tag_type['font'], 'r') as f:
+        with open(os.path.join(CWD,tag_type['font']), 'r') as f:
             GCODES = json.load(f)
         width = handle_GCODE(GCODES[character], origin, current_gcode)
         origin['x'] = width + SPACING
@@ -223,8 +219,13 @@ def get_text(tag_type,slot):
     return (current_gcode, remaining_space)
 
 if __name__ == '__main__':
+    #####################
+    # Getting this to work on ms store python debugging
+    print(CWD)
+    print("sys:", sys.path[0])
 
-    while True:        
+    ##############################
+    while True:
         tag_type = get_tag_type()
         if tag_type == None:
             break
@@ -236,7 +237,7 @@ if __name__ == '__main__':
             exit_tag =  input("[Enter] to continue or 'q' to return to Tag selection:\n")
             if exit_tag.capitalize() == 'Q':
                 break
-            total_gcode = ['G20'] # G20 indicates using English measurements
+            total_gcode = ['%','G90 G17 G20'] # G20 indicates using English measurements
             for slot in tag_type['slots']:
                 getting_text = True
                 remaining_space = 0
@@ -248,12 +249,13 @@ if __name__ == '__main__':
 
                 # Add current_gcode to total_gcode
                 total_gcode += current_gcode
-            print("GCode saved to 'g_code_output2.ngc'")
-            with open('g_code_output.ngc', 'w') as f:
+            total_gcode += [f'G1 Z{2* Z_HEIGHT_DISENGAGED}', f'G0 X0.0 Y0.0','%']
+            print("GCode saved to", OUTPUT_FILE_PATH)
+            with open(OUTPUT_FILE_PATH, 'w') as f:
                 for line in total_gcode:
                     f.write(line+'\n')
                     
             command = [r"C:\Program Files (x86)\CNC USB Controller\CNCUSBController.exe",
-                       os.path.join(CWD, 'g_code_output.ngc')]
-            # command = [r"C:\Program Files\Notepad++\notepad++.exe", os.path.join(CWD, 'g_code_output.ngc')]
+                       os.path.join(CWD, OUTPUT_FILE_PATH)]
+            command = [r"C:\Program Files\Notepad++\notepad++.exe", os.path.join(CWD, OUTPUT_FILE_PATH)]
             subprocess.Popen(command, shell=True)
