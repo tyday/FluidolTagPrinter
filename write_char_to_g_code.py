@@ -1,7 +1,5 @@
-import json
-import os
-import subprocess
-import turtle
+import json, os, subprocess
+# import turtle
 
 CWD = os.getcwd()
 DIRECTORY = os.path.join(CWD, 'Characters')
@@ -256,6 +254,6 @@ if __name__ == '__main__':
                     f.write(line+'\n')
                     
             command = [r"C:\Program Files (x86)\CNC USB Controller\CNCUSBController.exe",
-                       r"C:\Users\tyrda\OneDrive\Documents\Fluidol\CNC\PlanetCNCModernAPI\Python\g_code_output.ngc"]
-            # command = [r"C:\Program Files\Notepad++\notepad++.exe", r"C:\Users\tyrda\OneDrive\Documents\Fluidol\CNC\PlanetCNCModernAPI\Python\g_code_output.ngc"]
+                       os.path.join(CWD, 'g_code_output.ngc')]
+            command = [r"C:\Program Files\Notepad++\notepad++.exe", os.path.join(CWD, 'g_code_output.ngc')]
             subprocess.Popen(command, shell=True)
