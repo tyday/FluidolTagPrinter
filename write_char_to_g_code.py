@@ -255,5 +255,5 @@ if __name__ == '__main__':
                     
             command = [r"C:\Program Files (x86)\CNC USB Controller\CNCUSBController.exe",
                        os.path.join(CWD, 'g_code_output.ngc')]
-            command = [r"C:\Program Files\Notepad++\notepad++.exe", os.path.join(CWD, 'g_code_output.ngc')]
+            # command = [r"C:\Program Files\Notepad++\notepad++.exe", os.path.join(CWD, 'g_code_output.ngc')]
             subprocess.Popen(command, shell=True)
