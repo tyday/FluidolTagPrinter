@@ -28,8 +28,8 @@ TAG_DEFINITIONS = {
         ],
         'slots': [
             'style',
-            'serial',
-            'shaft'
+            'shaft',
+            'serial'
         ],
         'style': {
             'y': 0.3346457,
@@ -55,8 +55,8 @@ TAG_DEFINITIONS = {
         ],   
         'slots': [
             'style',
-            'serial',
-            'shaft'
+            'shaft',
+            'serial'
         ],
         'style': {
             'y': 0.2952756,
@@ -81,15 +81,15 @@ TAG_DEFINITIONS = {
             {'x':6.75, 'y':0.5},
         ],
         'slots': [
-            'serial',
-            'shaft'
+            'style',
+            'serial'
         ],
-        'serial': {
+        'style': {
             'y': 0.5211,
             'x1': 0.0572,
             'x2': 1.1038
         },
-        'shaft': {
+        'serial': {
             'y': 0.08267717,
             'x1': 0.0572,
             'x2': 1.1038
