@@ -25,8 +25,6 @@ TAG_DEFINITIONS = {
         'name': 'Large Tag',
         'local_origin': [
             {'x':0.5,'y':0.5},
-            {'x':0.5,'y':1.5},
-            {'x':0.5,'y':2.5},
         ],
         'slots': [
             'style',
@@ -54,8 +52,6 @@ TAG_DEFINITIONS = {
         'name': 'Small Tag',
         'local_origin': [
             {'x':3.75,'y':0.5},
-            {'x':3.75,'y':1.5},
-            {'x':3.75,'y':2.5},
         ],   
         'slots': [
             'style',
@@ -305,5 +301,6 @@ if __name__ == '__main__':
 
         command = [r"C:\Program Files (x86)\CNC USB Controller\CNCUSBController.exe",
                     os.path.join(CWD, OUTPUT_FILE_PATH)]
-        command = [r"C:\Program Files\Notepad++\notepad++.exe", os.path.join(CWD, OUTPUT_FILE_PATH)]
+        # uncomment the following line to print to notepad++
+        # command = [r"C:\Program Files\Notepad++\notepad++.exe", os.path.join(CWD, OUTPUT_FILE_PATH)]
         subprocess.Popen(command, shell=True)
