@@ -27,7 +27,7 @@ TAG_DEFINITIONS = {
             'serial'
         ],
         'style': {
-            'y': 0.3346457,     # Refers to the bottom of the style box
+            'y': 0.3346457,     # Refers to the bottom of the style box     Origin is bottom left of tag.
             'x1': 0.7480315,    # Refers to the left edge of the box
             'x2': 2.515748      # Refers to the right edge of the box
         },
