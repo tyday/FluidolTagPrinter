@@ -20,6 +20,10 @@ TAG_DEFINITIONS = {
         'name': 'Large Tag',
         'local_origin': [
             {'x':0.5,'y':0.5}, # Bottom left corner of the tag. Measured from the origin.
+            {'x':0.5,'y':1.5}, 
+            {'x':0.5,'y':2.5}, 
+            {'x':0.5,'y':3.5}, 
+            {'x':0.5,'y':4.5}, 
         ],
         'slots': [  # Name of the available slots. Needs corresponding definitions below
             'style',
@@ -47,6 +51,10 @@ TAG_DEFINITIONS = {
         'name': 'Small Tag',
         'local_origin': [
             {'x':3.75,'y':0.5},
+            {'x':3.75,'y':1.5},
+            {'x':3.75,'y':2.5},
+            {'x':3.75,'y':3.5},
+            {'x':3.75,'y':4.5},
         ],   
         'slots': [
             'style',
@@ -74,6 +82,10 @@ TAG_DEFINITIONS = {
         'name': 'Special Tag',
         'local_origin': [
             {'x':6.75, 'y':0.5},
+            {'x':6.75, 'y':1.5},
+            {'x':6.75, 'y':2.5},
+            {'x':6.75, 'y':3.5},
+            {'x':6.75, 'y':4.5},
         ],
         'slots': [
             'style',
